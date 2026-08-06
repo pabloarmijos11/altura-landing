@@ -1,0 +1,81 @@
+<section id="metodo" class="overflow-hidden bg-surface-alt py-section-sm md:py-section">
+  <div class="mx-auto max-w-[1600px] px-6 lg:px-20">
+    <div class="mb-16 text-center">
+      <span class="mb-4 block text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+        Guías técnicas
+      </span>
+      <h2 class="font-display text-4xl tracking-tight text-ink md:text-5xl">
+        El Ritual de Preparación
+      </h2>
+    </div>
+
+    <div
+      role="tablist"
+      aria-label="Métodos de preparación"
+      class="mb-16 flex justify-center gap-8 border-b border-border md:gap-12"
+      (keydown)="onKeydown($event)"
+    >
+      @for (method of methods; track method.id; let i = $index) {
+        @let isActive = activeIndex() === i;
+        <button
+          #tabButton
+          type="button"
+          role="tab"
+          [id]="'tab-' + method.id"
+          [attr.aria-selected]="isActive"
+          [attr.aria-controls]="'panel-' + method.id"
+          [tabindex]="isActive ? 0 : -1"
+          (click)="select(i)"
+          class="-mb-px flex min-h-11 cursor-pointer items-end border-b-2 pb-4 text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-200"
+          [class]="
+            isActive ? 'border-brand text-ink' : 'border-transparent text-ink-muted hover:text-ink'
+          "
+        >
+          {{ method.name }}
+        </button>
+      }
+    </div>
+
+    @let method = activeMethod();
+
+    <div
+      role="tabpanel"
+      [id]="'panel-' + method.id"
+      [attr.aria-labelledby]="'tab-' + method.id"
+      tabindex="0"
+      class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-24"
+    >
+      <div class="lg:col-span-5">
+        <div class="flex aspect-square items-center justify-center">
+          <img [src]="method.image" [alt]="method.alt" class="h-full w-full object-contain" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-12 lg:col-span-7">
+        <dl class="grid grid-cols-2 gap-8 md:grid-cols-4">
+          @for (parameter of method.parameters; track parameter.label) {
+            <div class="flex flex-col gap-1">
+              <dt class="text-[10px] font-semibold uppercase tracking-[0.15em] text-ink-muted">
+                {{ parameter.label }}
+              </dt>
+              <dd class="font-display text-2xl text-brand">{{ parameter.value }}</dd>
+            </div>
+          }
+        </dl>
+
+        <ol class="flex flex-col gap-8">
+          @for (step of method.steps; track step; let i = $index) {
+            <li class="flex gap-6">
+              <span class="font-display text-3xl text-brand/30" aria-hidden="true">
+                0{{ i + 1 }}
+              </span>
+              <!-- La columna llega a 784px en escritorio: sin tope, la línea se
+                   iba a ~87 caracteres y el ojo pierde el renglón al volver. -->
+              <p class="max-w-[65ch] text-lg text-ink-muted">{{ step }}</p>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

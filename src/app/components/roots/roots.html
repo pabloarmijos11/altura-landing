@@ -1,0 +1,53 @@
+<section id="raices" class="bg-background py-section-sm md:py-section">
+  <div class="mx-auto max-w-[1600px] px-6 lg:px-20">
+    <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
+      <div appRevealOnScroll class="lg:col-span-5 lg:col-start-2">
+        <h2 class="mb-6 font-display text-4xl text-brand">Nuestras Raíces</h2>
+
+        <p class="mb-6 text-ink-muted">
+          Nuestro café nace en los ricos suelos volcánicos de los Andes ecuatorianos, en altitudes
+          que superan los 1.800 metros sobre el nivel del mar. Las condiciones climáticas extremas y
+          la pureza del aire de la montaña crean un microclima ideal para el cultivo de granos de
+          especialidad con perfiles de sabor que cambian de una finca a otra.
+        </p>
+        <p class="mb-8 text-ink-muted">
+          Trabajamos directamente con familias caficultoras que han perfeccionado su oficio durante
+          generaciones, honrando la tierra y preservando métodos de cosecha manual que aseguran que
+          solo las cerezas más maduras lleguen a su taza.
+        </p>
+
+        <a
+          href="#coleccion"
+          class="link-underline inline-flex cursor-pointer items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-brand transition-colors hover:text-brand-hover"
+        >
+          Conozca a nuestros productores
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+
+      <div appRevealOnScroll="1" class="mt-12 lg:col-span-5 lg:col-start-8 lg:mt-0">
+        <!-- El margen inferior deja sitio a la tarjeta que sobresale; sin él,
+             la ficha se solaparía con la sección siguiente en pantallas medias. -->
+        <div class="relative mb-6 aspect-[4/5] w-full shadow-xl">
+          <img
+            src="/images/roots.webp"
+            alt="Caficultora sosteniendo granos de café recién cosechados en la palma de las manos"
+            class="photo-print h-full"
+            loading="lazy"
+          />
+
+          <figcaption
+            class="absolute -bottom-6 -left-6 hidden border border-border bg-surface p-6 shadow-sm md:block"
+          >
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-brand">
+              Finca El Mirador
+            </p>
+            <p class="mt-1 text-ink-muted">Loja, Ecuador</p>
+          </figcaption>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

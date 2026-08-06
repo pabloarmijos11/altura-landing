@@ -1,0 +1,262 @@
+/* Altura — tokens de diseño.
+   Fuente de verdad: design-system/altura/MASTER.md
+   Ningún componente debe declarar un color crudo: todo sale de aquí. */
+
+@import 'tailwindcss';
+
+/* El modo oscuro se activa con la clase .dark en <html>, no con la preferencia
+   del sistema. Así el usuario puede sobrescribirla con el interruptor; el
+   ThemeService es quien decide el valor inicial leyendo la preferencia. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Valores crudos. Son los que cambian entre temas. */
+:root {
+  color-scheme: light;
+
+  --alt-bg: #fdfbf7;
+  --alt-surface: #ffffff;
+  --alt-surface-alt: #fdf6e9;
+  --alt-ink: #2a1a10;
+  --alt-ink-muted: #6b5545;
+  --alt-brand: #92400e;
+  --alt-brand-hover: #7c3508;
+  --alt-on-brand: #ffffff;
+  --alt-accent: #4f6f52;
+  --alt-border: #e8dccb;
+  --alt-destructive: #dc2626;
+  --alt-shadow-color: 42 26 16;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --alt-bg: #17110d;
+  --alt-surface: #211913;
+  --alt-surface-alt: #2b211a;
+  --alt-ink: #f2e9df;
+  --alt-ink-muted: #b8a695;
+  --alt-brand: #d98a4e;
+  --alt-brand-hover: #e59b62;
+  --alt-on-brand: #1a120c;
+  --alt-accent: #8fb393;
+  --alt-border: #3a2c22;
+  /* Más claro que el #DC2626 del modo claro: sobre fondo oscuro necesita más
+     luminosidad para el mismo umbral, el mismo criterio que ya se aplicó a
+     --alt-brand y --alt-accent. */
+  --alt-destructive: #f87171;
+  --alt-shadow-color: 0 0 0;
+}
+
+/* `inline` hace que las utilidades se compilen a var(--alt-*) directamente.
+   Sin él, el valor quedaría congelado al del tema claro en tiempo de build. */
+/* Colores para elementos que viven sobre fotografía con overlay oscuro.
+   NO cambian entre temas, y eso es deliberado: el fondo de esos elementos es
+   la foto, que se ve igual en claro y en oscuro. Un token que cambiara aquí
+   rompería el contraste en vez de conservarlo. */
+:root,
+.dark {
+  --alt-on-photo-surface: #ffffff;
+  --alt-on-photo-ink: #2a1a10;
+  /* El --alt-destructive que sí cambia con el tema (#DC2626 / #F87171) está
+     calibrado contra fondos de tarjeta y de página, no contra blanco fijo.
+     El error del formulario de suscripción vive sobre on-photo-surface
+     (blanco fijo): en modo oscuro, #F87171 da 2.77:1 ahí — ilegible. Mismo
+     razonamiento que on-photo-ink: el rol es "error sobre blanco fijo", no
+     "error del tema", así que necesita su propio valor invariante. */
+  --alt-on-photo-destructive: #dc2626;
+
+  /* El pie es oscuro en los dos temas: cierra la página como el lomo de un
+     libro. Si siguiera al tema, en modo oscuro se fundiría con el contenido
+     y la página terminaría en un bloque plano sin final. */
+  --alt-footer-surface: #17110d;
+  --alt-footer-ink: #f2e9df;
+  --alt-footer-muted: #b8a695;
+  --alt-footer-border: #3a2c22;
+}
+
+@theme inline {
+  --color-on-photo-surface: var(--alt-on-photo-surface);
+  --color-on-photo-ink: var(--alt-on-photo-ink);
+  --color-on-photo-destructive: var(--alt-on-photo-destructive);
+  --color-footer-surface: var(--alt-footer-surface);
+  --color-footer-ink: var(--alt-footer-ink);
+  --color-footer-muted: var(--alt-footer-muted);
+  --color-footer-border: var(--alt-footer-border);
+
+  --color-background: var(--alt-bg);
+  --color-surface: var(--alt-surface);
+  --color-surface-alt: var(--alt-surface-alt);
+  --color-ink: var(--alt-ink);
+  --color-ink-muted: var(--alt-ink-muted);
+  --color-brand: var(--alt-brand);
+  --color-brand-hover: var(--alt-brand-hover);
+  --color-on-brand: var(--alt-on-brand);
+  --color-accent: var(--alt-accent);
+  --color-border: var(--alt-border);
+  --color-destructive: var(--alt-destructive);
+
+  /* Bodoni Moda es variable con eje de tamaño óptico (opsz): adelgaza los
+     remates en titulares grandes y los engorda en tamaños pequeños. Sustituye
+     a Libre Bodoni por sugerencia de Stitch, y es una mejora real. */
+  --font-display: 'Bodoni Moda', ui-serif, Georgia, serif;
+  --font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Ritmo vertical de las secciones. Densidad 3/10 — espaciosa. */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 4rem;
+
+  /* Sombras en marrón translúcido: el negro puro sobre fondos cálidos apaga la
+     sección y la vuelve gris.
+     Muy difusas y de baja opacidad, según el criterio de Stitch: deben leerse
+     como luz cayendo sobre un papel, no como una ventana flotando. */
+  --shadow-sm: 0 2px 8px rgb(var(--alt-shadow-color) / 0.03);
+  --shadow-md: 0 8px 24px rgb(var(--alt-shadow-color) / 0.04);
+  --shadow-lg: 0 16px 40px rgb(var(--alt-shadow-color) / 0.06);
+  --shadow-xl: 0 24px 60px rgb(var(--alt-shadow-color) / 0.08);
+
+  --ease-reveal: cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* La cabecera es fija: sin este margen, al saltar a una sección desde el menú
+     el título queda oculto debajo de ella y parece que el enlace no funcionó. */
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    /* La transición de tema va en el body, no en `*`: animar todos los
+       elementos del árbol provoca un tirón visible al cambiar de tema. */
+    transition:
+      background-color 300ms ease,
+      color 300ms ease;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  /* Bodoni tiene remates muy finos: por debajo de 24px desaparecen.
+     Cualquier texto pequeño va en Public Sans. */
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Estado inicial de los elementos que se revelan al hacer scroll.
+     La directiva RevealOnScroll añade .is-visible. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 400ms ease,
+      transform 400ms var(--ease-reveal);
+    /* El escalonado lo fija cada componente con --i en el elemento. */
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  /* Tarjeta editorial. El hover cambia el fondo y no eleva: una tarjeta que
+     flota es lenguaje de aplicación, y el papel no levita. Criterio de Stitch,
+     adoptado sobre el original. */
+  .card-editorial {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .card-editorial:hover {
+    background-color: var(--color-surface-alt);
+  }
+
+  /* Nota de cata. El acento al 10% con el texto en el color pleno. */
+  .chip-tasting {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+
+  /* Subrayado que crece de izquierda a derecha al pasar el ratón.
+     Se anima `width`, que normalmente está prohibido, pero aquí el elemento es
+     un pseudoelemento absoluto de 1px: no participa en el layout de nadie. */
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background-color: currentColor;
+    transition: width 300ms ease;
+  }
+
+  .link-underline:hover::after,
+  .link-underline.is-current::after {
+    width: 100%;
+  }
+
+  /* La fotografía va a canto vivo; solo los elementos de interfaz se redondean.
+     Es lo que separa una página de revista de un panel de control. */
+  .photo-print {
+    border-radius: 0;
+    display: block;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Accesibilidad: no es un parche final, es parte del sistema.
+   Quien active esta preferencia ve el contenido, nunca una página en blanco. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

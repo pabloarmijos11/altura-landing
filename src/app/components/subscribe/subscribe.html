@@ -1,0 +1,66 @@
+<section id="suscripcion" class="bg-brand py-section-sm text-on-brand md:py-section">
+  <div class="mx-auto max-w-3xl px-6 text-center">
+    <h2 class="mb-4 font-display text-4xl md:text-5xl">Un café nuevo cada mes</h2>
+    <p class="mb-10 text-lg text-on-brand/80">
+      Únase a nuestro club para recibir ediciones limitadas, notas de cata exclusivas y acceso
+      anticipado a nuevas cosechas.
+    </p>
+
+    @if (submitted()) {
+      <!-- El aviso se anuncia solo en los lectores de pantalla: quien no ve el
+           cambio de la página necesita que se le diga que ocurrió algo. -->
+      <p
+        role="status"
+        class="mx-auto max-w-xl border border-on-brand/30 bg-on-photo-surface px-6 py-4 font-semibold text-on-photo-ink"
+      >
+        Gracias por suscribirse. Le escribiremos con la próxima cosecha.
+      </p>
+    } @else {
+      @let emailField = subscribeForm.email();
+      @let showError = emailField.touched() && emailField.invalid();
+
+      <form
+        class="mx-auto flex max-w-xl flex-col items-start gap-4 sm:flex-row"
+        (submit)="onSubmit(); $event.preventDefault()"
+      >
+        <div class="w-full flex-grow text-left">
+          <label class="sr-only" for="email">Correo electrónico</label>
+          <!-- Fondo blanco sólido, no transparente con borde: sobre un bloque de
+               color, un campo translúcido obliga a adivinar dónde se escribe.
+               El estado de error usa on-photo-destructive, no destructive: este
+               campo vive sobre blanco fijo, no sobre el fondo que cambia con el
+               tema (ver nota en styles.css). -->
+          <input
+            id="email"
+            type="email"
+            autocomplete="email"
+            placeholder="Su correo electrónico"
+            [formField]="subscribeForm.email"
+            [attr.aria-invalid]="showError"
+            [attr.aria-describedby]="showError ? 'email-error' : null"
+            class="w-full border-2 bg-on-photo-surface px-4 py-3 text-on-photo-ink placeholder:text-on-photo-ink/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-on-photo-surface"
+            [class]="showError ? 'border-on-photo-destructive' : 'border-transparent'"
+          />
+          @if (showError) {
+            <p id="email-error" role="alert" class="mt-2 text-sm font-semibold text-on-photo-destructive">
+              {{ emailField.errors()[0].message }}
+            </p>
+          }
+        </div>
+
+        <!-- min-w evita que el botón cambie de ancho entre "Suscribirme" y
+             "Enviando…": el mismo criterio que ya se aplicó al botón de
+             "Añadir al carrito" en la colección. -->
+        <button
+          type="submit"
+          [disabled]="subscribeForm().invalid() || submitting()"
+          class="min-w-44 cursor-pointer whitespace-nowrap bg-on-photo-surface px-8 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-on-photo-ink transition-opacity duration-300 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:opacity-50"
+        >
+          {{ submitting() ? 'Enviando…' : 'Suscribirme' }}
+        </button>
+      </form>
+
+      <p class="mt-6 text-sm text-on-brand/70">Sin permanencia. Cancele cuando quiera.</p>
+    }
+  </div>
+</section>

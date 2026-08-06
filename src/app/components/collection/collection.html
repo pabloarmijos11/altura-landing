@@ -1,0 +1,73 @@
+<section id="coleccion" class="bg-background py-section-sm md:py-section">
+  <div class="mx-auto max-w-[1600px] px-6 lg:px-20">
+    <div appRevealOnScroll class="mb-16 text-center">
+      <h2 class="mb-4 font-display text-4xl text-brand md:text-5xl">Colección de Origen</h2>
+      <p class="mx-auto max-w-2xl text-ink-muted">
+        Tres regiones cafetaleras de Ecuador: Loja, Zamora-Chinchipe e Imbabura. Cada origen cuenta
+        la historia de su terruño a través de notas de cata únicas.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      @for (coffee of coffees; track coffee.name; let i = $index) {
+        <article [appRevealOnScroll]="i" class="card-editorial group flex flex-col p-8">
+          <div class="mb-8 flex aspect-square items-center justify-center overflow-hidden bg-surface-alt">
+            <img
+              [src]="coffee.image"
+              [alt]="coffee.alt"
+              class="h-2/3 w-2/3 object-contain transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="flex flex-1 flex-col text-center">
+            <span class="mb-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-brand">
+              {{ coffee.region }}
+            </span>
+            <h3 class="mb-4 font-display text-2xl text-ink">{{ coffee.name }}</h3>
+
+            <ul class="mb-4 flex flex-wrap justify-center gap-2">
+              @for (note of coffee.notes; track note) {
+                <li class="chip-tasting">{{ note }}</li>
+              }
+            </ul>
+
+            <div class="mb-6 mt-auto flex flex-col gap-1">
+              <span class="text-sm text-ink-muted">{{ coffee.altitude }}</span>
+              <!-- 24px es el suelo de Bodoni: por debajo, sus remates finos se
+                   deshacen. Nunca bajar este tamaño. -->
+              <span class="font-display text-2xl text-brand">{{ coffee.price }}</span>
+            </div>
+
+            <!-- El botón mantiene su ancho y su alto entre los dos estados: si
+                 el texto más corto lo encogiera, la tarjeta daría un salto justo
+                 cuando el usuario acaba de pulsar.
+                 La confirmación no se distingue solo por el verde — lleva marca
+                 de verificación y cambia la palabra. -->
+            @let added = addedName() === coffee.name;
+            <button
+              type="button"
+              (click)="add(coffee.name)"
+              class="flex w-full cursor-pointer items-center justify-center gap-2 border py-3 text-sm font-semibold uppercase tracking-[0.1em] transition-colors duration-300"
+              [class]="
+                added
+                  ? 'border-accent text-accent'
+                  : 'border-brand text-brand hover:bg-brand hover:text-on-brand'
+              "
+            >
+              @if (added) {
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                Añadido
+              } @else {
+                Añadir al carrito
+              }
+              <span class="sr-only">: {{ coffee.name }}</span>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

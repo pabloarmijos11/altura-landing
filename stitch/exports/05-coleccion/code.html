@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Altura | Cafés de Especialidad</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Public+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#f7e4dd",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001d33",
+                        "on-primary-container": "#ffc2a5",
+                        "tertiary": "#00446d",
+                        "surface-bright": "#fff8f6",
+                        "outline-variant": "#dcc1b6",
+                        "secondary": "#466649",
+                        "on-primary-fixed": "#341000",
+                        "primary-fixed-dim": "#ffb693",
+                        "surface-tint": "#9a4614",
+                        "on-secondary-fixed": "#03210b",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ffb693",
+                        "primary": "#712c00",
+                        "tertiary-container": "#005c92",
+                        "surface-container": "#fdeae3",
+                        "background": "#fff8f6",
+                        "primary-fixed": "#ffdbcb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#2f4e33",
+                        "surface-container-low": "#fff1eb",
+                        "tertiary-fixed-dim": "#98cbff",
+                        "on-surface-variant": "#55433a",
+                        "surface-variant": "#f1dfd8",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#c8ecc8",
+                        "secondary-fixed-dim": "#acd0ad",
+                        "on-secondary": "#ffffff",
+                        "outline": "#887269",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#f1dfd8",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#a8d3ff",
+                        "surface-dim": "#e8d6cf",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#392e2a",
+                        "primary-container": "#92400e",
+                        "inverse-on-surface": "#ffede6",
+                        "on-background": "#231a15",
+                        "on-surface": "#231a15",
+                        "surface": "#fff8f6",
+                        "on-tertiary-fixed-variant": "#004a77",
+                        "tertiary-fixed": "#cee5ff",
+                        "secondary-container": "#c5e9c5",
+                        "on-secondary-container": "#4a6a4d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap-tablet": "64px",
+                        "section-gap-desktop": "96px",
+                        "stack-gap": "24px",
+                        "gutter": "24px",
+                        "section-gap-mobile": "48px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Bodoni Moda"],
+                        "display-lg": ["Bodoni Moda"],
+                        "body-md": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "button": ["Public Sans"],
+                        "label-caps": ["Public Sans"],
+                        "headline-lg": ["Bodoni Moda"],
+                        "headline-lg-mobile": ["Bodoni Moda"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "button": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .nav-link-hover {
+            position: relative;
+        }
+        .nav-link-hover::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        .nav-link-hover:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased font-body-md text-body-md">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 transition-all duration-300" id="main-header">
+<div class="flex justify-between items-center w-full px-margin-desktop py-8 max-w-full mx-auto z-50 bg-transparent no-border">
+<div class="flex-1">
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant font-label-caps text-label-caps nav-link-hover transition-colors duration-300" href="#">Orígenes</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps nav-link-hover transition-colors duration-300" href="#">Productos</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps nav-link-hover transition-colors duration-300" href="#">Nuestra Historia</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps nav-link-hover transition-colors duration-300" href="#">Suscripciones</a>
+</nav>
+</div>
+<div class="flex-1 text-center">
+<a class="font-headline-lg text-headline-lg tracking-tighter text-primary" href="#">ALTURA</a>
+</div>
+<div class="flex-1 flex justify-end">
+<button class="text-on-surface hover:text-primary transition-colors duration-300">
+<span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative h-screen w-full flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Coffee farm in the Ecuadorian Andes" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLsghr4zKWWoByR4ZdxwbGom2O5gMdAMw1wrz47FgtEoTacQmn68SVDVD66Fi656DzT_414edBHHAsbi3QwjNxnrHPS6AIKMX174yUy0lvF8GDJnK6e6v9wpmnDeEvkMMGpd92SOYCxvN0ojzdBKOU5d2vWNzfRi0nhC3EUKnwDz_6-_ylZTaSR2P6tNgzVohSVGN11XBZm8ijMUZdWSV4IllqpEtY1CyvU-MH2DC2HbPnZWK9Ymc5PWVyE"/>
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<div class="relative z-10 px-margin-desktop w-full max-w-[1600px] mx-auto">
+<div class="max-w-[640px] flex flex-col gap-8">
+<span class="font-label-caps text-label-caps text-white tracking-widest uppercase">Tostado en Loja, Ecuador</span>
+<h1 class="font-headline-lg text-7xl text-white tracking-tight leading-[1.1]">
+        El café crece mejor<br/>donde el aire es delgado
+      </h1>
+<p class="font-body-lg text-body-lg text-white/90 max-w-xl">
+        Descubra granos de origen único cultivados a más de 1,800 metros, donde la altitud y el clima volcánico crean perfiles de sabor inigualables.
+      </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<button class="bg-primary-container text-white font-button text-button uppercase px-8 py-4 tracking-widest hover:bg-primary transition-colors duration-300">
+          Ver la colección
+        </button>
+<button class="border border-white text-white font-button text-button uppercase px-8 py-4 tracking-widest hover:bg-white hover:text-primary transition-colors duration-300">
+          Conocer el origen
+        </button>
+</div>
+</div>
+</div>
+</section><section class="py-section-gap-desktop bg-[#FDFBF7] overflow-hidden">
+<div class="px-margin-desktop max-w-[1600px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+<!-- Left Column (40%) -->
+<div class="lg:col-span-5 flex flex-col gap-8">
+<div class="flex flex-col gap-4">
+<span class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase">Capítulo 01</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface leading-[1.1] tracking-tight">1.800 metros sobre el nivel del mar</h2>
+</div>
+<div class="flex flex-col gap-6">
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+            En las cumbres de Loja, el aire se vuelve más ligero y el tiempo parece transcurrir a otro ritmo. A esta altitud extrema, la presión atmosférica y las temperaturas frescas obligan a los cafetos a concentrar toda su energía en la protección de sus semillas.
+          </p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+            Este proceso de maduración lenta permite que los azúcares naturales se desarrollen con una densidad excepcional, resultando en granos con una complejidad aromática y una dulzura que simplemente no puede replicarse en tierras bajas.
+          </p>
+</div>
+<div class="grid grid-cols-3 gap-8 pt-8 border-t border-outline-variant/30">
+<div class="flex flex-col gap-2">
+<span class="font-headline-md text-headline-md text-primary">1.800 m</span>
+<span class="font-label-caps text-[10px] tracking-widest text-on-surface-variant uppercase">Altitud Media</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-headline-md text-headline-md text-primary">3</span>
+<span class="font-label-caps text-[10px] tracking-widest text-on-surface-variant uppercase">Fincas</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-headline-md text-headline-md text-primary">180 d</span>
+<span class="font-label-caps text-[10px] tracking-widest text-on-surface-variant uppercase">Maduración</span>
+</div>
+</div>
+</div>
+<!-- Right Column (60%) -->
+<div class="lg:col-span-7">
+<div class="relative aspect-[4/5] w-full overflow-hidden shadow-2xl">
+<img alt="Vista panorámica de una finca de café en los Andes ecuatorianos" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLsghr4zKWWoByR4ZdxwbGom2O5gMdAMw1wrz47FgtEoTacQmn68SVDVD66Fi656DzT_414edBHHAsbi3QwjNxnrHPS6AIKMX174yUy0lvF8GDJnK6e6v9wpmnDeEvkMMGpd92SOYCxvN0ojzdBKOU5d2vWNzfRi0nhC3EUKnwDz_6-_ylZTaSR2P6tNgzVohSVGN11XBZm8ijMUZdWSV4IllqpEtY1CyvU-MH2DC2HbPnZWK9Ymc5PWVyE"/>
+</div>
+</div>
+</div>
+</div>
+</section><section class="py-24 bg-[#FDF6E9] overflow-hidden">
+<div class="px-margin-desktop max-w-[1600px] mx-auto">
+<div class="text-center mb-24">
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">El Arte del Tueste</h2>
+</div>
+<div class="relative">
+<!-- Desktop Timeline Line -->
+<div class="hidden md:block absolute top-[45px] left-0 w-full h-[1px] bg-primary-container/30 z-0"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 relative z-10">
+<!-- Step 1 -->
+<div class="flex flex-col items-center md:items-start group">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center border border-primary-container shadow-sm">
+<span class="material-symbols-outlined text-primary">wb_sunny</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary/20">01</span>
+</div>
+<div class="flex flex-col gap-3 text-center md:text-left">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">160°C</span>
+<h3 class="font-headline-md text-2xl text-on-surface">Secado</h3>
+<p class="font-body-md text-on-surface-variant max-w-[240px]">El grano pierde humedad y se prepara para la transformación.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center md:items-start group">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center border border-primary-container shadow-sm">
+<span class="material-symbols-outlined text-primary">local_fire_department</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary/20">02</span>
+</div>
+<div class="flex flex-col gap-3 text-center md:text-left">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">196°C</span>
+<h3 class="font-headline-md text-2xl text-on-surface">Primer crack</h3>
+<p class="font-body-md text-on-surface-variant max-w-[240px]">Los azúcares se caramelizan y el grano expande su volumen.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center md:items-start group">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center border border-primary-container shadow-sm">
+<span class="material-symbols-outlined text-primary">coffee</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary/20">03</span>
+</div>
+<div class="flex flex-col gap-3 text-center md:text-left">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">210°C</span>
+<h3 class="font-headline-md text-2xl text-on-surface">Desarrollo</h3>
+<p class="font-body-md text-on-surface-variant max-w-[240px]">Se definen los perfiles de acidez y notas aromáticas finales.</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center md:items-start group">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center border border-primary-container shadow-sm">
+<span class="material-symbols-outlined text-primary">ac_unit</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary/20">04</span>
+</div>
+<div class="flex flex-col gap-3 text-center md:text-left">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">25°C</span>
+<h3 class="font-headline-md text-2xl text-on-surface">Enfriado</h3>
+<p class="font-body-md text-on-surface-variant max-w-[240px]">Proceso rápido para detener la cocción y preservar aceites.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Nuestras Raíces -->
+<section class="py-section-gap-desktop px-margin-desktop max-w-[1600px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-5 lg:col-start-2">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">Nuestras Raíces</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                    Nuestro café nace en los ricos suelos volcánicos de los Andes ecuatorianos, en altitudes que superan los 1,800 metros sobre el nivel del mar. Las condiciones climáticas extremas y la pureza del aire de la montaña crean un microclima ideal para el cultivo de granos de especialidad con perfiles de sabor extraordinariamente complejos.
+                </p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                    Trabajamos directamente con familias caficultoras que han perfeccionado su oficio durante generaciones, honrando la tierra y preservando métodos de cosecha manual que aseguran que solo las cerezas más maduras llegen a su taza.
+                </p>
+<a class="inline-flex items-center text-primary font-button text-button uppercase tracking-widest hover:text-primary-container transition-colors" href="#">
+                    Conozca a nuestros productores <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="lg:col-span-5 lg:col-start-8 mt-12 lg:mt-0">
+<div class="relative w-full aspect-[4/5] shadow-2xl shadow-primary/5">
+<img alt="Productora de café con granos" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPuy77k_DBNfo851ty7qcKQTQs3ba-Fe-kDC0bXJF3uhdAMdW0eQbjpi-S9K6uPA3FGSiF2qGWPphEihh6dkWa0QWimldzF9KFOXqntBRFQ9LSGoN9WiosWtNsCqPOQKxTrK12KGrSMy0YIBMYkARewpXc5Z957F1paEOTBmQTaKaBfVrTqYuoucU1NqBGmBhyf8Mj5JxXYD8aK9KKZ-_DH2UAGIalLI9hJG3urIVind0ukpfzxzd9"/>
+<div class="absolute -bottom-6 -left-6 bg-surface p-6 border border-outline-variant shadow-sm hidden md:block">
+<p class="font-label-caps text-label-caps text-primary tracking-widest">Finca El Mirador</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Loja, Ecuador</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Colección de Origen -->
+<section class="py-section-gap-desktop bg-surface-container-low">
+<div class="px-margin-desktop max-w-[1600px] mx-auto text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Colección de Origen</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
+                Una selección curada de nuestras regiones cafetaleras más excepcionales. Cada origen cuenta la historia de su terruño a través de notas de cata únicas.
+            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-desktop max-w-[1600px] mx-auto">
+<!-- Product 1 -->
+<div class="bg-surface border border-outline-variant p-8 group hover:bg-surface-bright transition-colors duration-500 shadow-sm hover:shadow-md">
+<div class="aspect-square mb-8 relative overflow-hidden bg-surface-container-low flex items-center justify-center">
+<img class="w-2/3 h-2/3 object-contain transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist, high-end product mockup of a sleek, matte brown coffee bag standing upright against a pristine white background. Soft, diffused lighting highlights the subtle texture of the packaging. The aesthetic is clean, modern, and editorial, perfectly suited for a luxury specialty coffee brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUoCbsqaeSVC3Bbcp6xYsgpeECDhnA90LU-brIkScW_o3sKZKvpJ1xI-NE1kcM46SIlSK_fTIudM-Mz4fNq1yVu5OZ1AwOlSUhmT29lGt4vjUJvgJ1UvFMSKfAb_zg8bF_V6bdssaxk4-rJt59tKwe8neHEzqocuwqT5bn_WJtJ6Rp4ySAtFG50vxKVS5rwjqyFE4cSnXWfbw2BLFK8jMNApNKr64I_se0DtOThGsYrsNwdTRSsKmm"/>
+</div>
+<div class="text-center">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Loja</h3>
+<div class="flex flex-col items-center justify-center gap-3 mb-6">
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-widest border-b border-outline-variant pb-1">1,900 MSNM</span>
+<div class="flex gap-2">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Chocolate Oscuro</span>
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Cítricos</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 text-sm">
+                        Un perfil clásico y elegante. Cuerpo sedoso con una acidez brillante que recuerda a la mandarina, finalizando con notas profundas de cacao.
+                    </p>
+<button class="w-full border border-on-surface text-on-surface font-button text-button uppercase py-3 hover:bg-on-surface hover:text-surface transition-colors duration-300">
+                        Añadir al carrito
+                    </button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-surface border border-outline-variant p-8 group hover:bg-surface-bright transition-colors duration-500 shadow-sm hover:shadow-md">
+<div class="aspect-square mb-8 relative overflow-hidden bg-surface-container-low flex items-center justify-center">
+<img class="w-2/3 h-2/3 object-contain transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist, high-end product mockup of a sleek, matte brown coffee bag standing upright against a pristine white background. Soft, diffused lighting highlights the subtle texture of the packaging. The aesthetic is clean, modern, and editorial, perfectly suited for a luxury specialty coffee brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz1P8Msknl6WglycKOfsbUzROqAr9UGVFVsnyghOV2pVoLRBmRg9iawkaRY6mrk5EMdbOSvYumX-40UHKU-jXQhYIugnd2g5d-YxHrVOXdGGwQFLRBxXakHHMBWm8NFuAwZu0lLNABmVwiEhMbnX2LluECJIPMRm8ufePn649UsKAXOtyjB4IRCVCpIjFYbjwFxJAWSdM5Nb19466Yx4HPgnV96jUaT7IxoPl8LgnLM_l5Fii-s5ol"/>
+</div>
+<div class="text-center">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Intag</h3>
+<div class="flex flex-col items-center justify-center gap-3 mb-6">
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-widest border-b border-outline-variant pb-1">1,600 MSNM</span>
+<div class="flex gap-2">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Panela</span>
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Frutos Rojos</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 text-sm">
+                        Proveniente del bosque nublado, este café ofrece una dulzura pronunciada a caña de azúcar, balanceada con una jugosa acidez de frutos del bosque.
+                    </p>
+<button class="w-full border border-on-surface text-on-surface font-button text-button uppercase py-3 hover:bg-on-surface hover:text-surface transition-colors duration-300">
+                        Añadir al carrito
+                    </button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-surface border border-outline-variant p-8 group hover:bg-surface-bright transition-colors duration-500 shadow-sm hover:shadow-md">
+<div class="aspect-square mb-8 relative overflow-hidden bg-surface-container-low flex items-center justify-center">
+<img class="w-2/3 h-2/3 object-contain transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist, high-end product mockup of a sleek, matte brown coffee bag standing upright against a pristine white background. Soft, diffused lighting highlights the subtle texture of the packaging. The aesthetic is clean, modern, and editorial, perfectly suited for a luxury specialty coffee brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqjA6EIITza3IHHbozDmNSI_o3yeE5odKHKhut-YPyaTpMbsI2Ux9WZGmI4RmUrmQNaT3lgekGgZSmfHvEz0Eb6wi1j9PVYm8i0bvRATUfdB5Q3o1TYQTXyJduE4I1xk3XUP4PjQNWClcBHF1pGz5iMGnE2MJfsL5NRIESH58VmsP86xTyTIvwbWvWkwn6Ic2UdwnIfz2Me8XSbRhcJAt3Dx0D2gBUCWlqsxJZKZfB3hIyA9AXMdtk"/>
+</div>
+<div class="text-center">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Zamora</h3>
+<div class="flex flex-col items-center justify-center gap-3 mb-6">
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-widest border-b border-outline-variant pb-1">1,750 MSNM</span>
+<div class="flex gap-2">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Jazmín</span>
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Miel</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 text-sm">
+                        Cultivado en la ceja de selva amazónica. Un perfil delicado y floral, con notas aromáticas a jazmín y un retrogusto persistente a miel silvestre.
+                    </p>
+<button class="w-full border border-on-surface text-on-surface font-button text-button uppercase py-3 hover:bg-on-surface hover:text-surface transition-colors duration-300">
+                        Añadir al carrito
+                    </button>
+</div>
+</div>
+</div>
+<div class="mt-24 px-margin-desktop max-w-[1600px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+<div class="h-[600px]">
+<img alt="Tazón de granos de café tostados" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUM_37ZWFiJJQeCmNs1BKBvp15TtvUy0bQiaxWpGPRPlPHpBlzDNBfuufIyI8rzXoaz7a2GBZFA00eebIZ4xSRgJ8oWynl0UnJ_kfgwEGsCry139GpOvmn0aiVmmuA8L8pmnqdLP89W_EaJEVi5Hp_acXihjig42JSIID_sRopsONtsgWEiXeYccG-jVf8H51niwfD7wUsGI7KEVumWaR18HEQSOf8LZgGSedG-51R2IIUaomzU1Ru"/>
+</div>
+<div class="bg-primary text-on-primary p-12 lg:p-24 flex flex-col justify-center">
+<h2 class="font-headline-md text-headline-md mb-6 font-light">Elaborado con Intención</h2>
+<p class="font-body-lg text-body-lg text-on-primary/80 mb-8 font-light leading-relaxed">
+                        Creemos que el mejor café es el resultado de una atención meticulosa en cada etapa. Desde la selección de la semilla hasta el tueste final, nuestro enfoque es siempre el mismo: elevar el sabor inherente del grano, respetando su origen y el arduo trabajo de quienes lo cultivaron.
+                    </p>
+<a class="inline-flex items-center text-white font-button text-button uppercase tracking-widest hover:text-primary-fixed-dim transition-colors w-fit pb-1 border-b border-white/30 hover:border-white" href="#">
+                        Descubra nuestro proceso
+                    </a>
+</div>
+</div>
+</div>
+</section>
+<!-- El Arte del Tueste -->
+<section class="py-section-gap-desktop px-margin-desktop max-w-[1200px] mx-auto text-center border-b border-outline-variant">
+<h2 class="font-headline-md text-headline-md text-primary mb-16">El Arte del Tueste</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-6" style="font-weight: 200;">eco</span>
+<h4 class="font-label-caps text-label-caps text-on-surface tracking-widest mb-3">Selección Ética</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Relaciones directas con productores que practican agricultura regenerativa.</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-6" style="font-weight: 200;">wb_sunny</span>
+<h4 class="font-label-caps text-label-caps text-on-surface tracking-widest mb-3">Secado al Sol</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Procesado lento y natural para desarrollar dulzura y complejidad en cada grano.</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-6" style="font-weight: 200;">local_fire_department</span>
+<h4 class="font-label-caps text-label-caps text-on-surface tracking-widest mb-3">Tueste de Precisión</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Curvas de tueste diseñadas específicamente para resaltar el terroir de cada lote.</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-6" style="font-weight: 200;">water_drop</span>
+<h4 class="font-label-caps text-label-caps text-on-surface tracking-widest mb-3">Fresco Siempre</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Tostado bajo demanda y enviado inmediatamente para máxima frescura en taza.</p>
+</div>
+</div>
+</section><section class="py-section-gap-desktop bg-[#FDFBF7]"><div class="px-margin-desktop max-w-[1600px] mx-auto"><div class="text-center mb-16"><h2 class="font-headline-md text-headline-md text-primary mb-4">Colección de Origen</h2><p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Granos excepcionales seleccionados por su perfil único y calidad superior.</p></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter"><!-- Card 1 --><div class="bg-surface border border-outline-variant p-8 group hover:bg-surface-bright transition-all duration-500 shadow-sm hover:shadow-md hover:-translate-y-1"><div class="aspect-square mb-8 relative overflow-hidden bg-surface-container-low flex items-center justify-center"><div class="w-2/3 h-2/3 bg-primary-container/10 flex items-center justify-center text-primary/20"><span class="material-symbols-outlined text-6xl">coffee_maker</span></div></div><div class="text-center"><span class="font-label-caps text-[10px] text-primary tracking-widest uppercase mb-2 block">Vilcabamba, Ecuador</span><h3 class="font-headline-md text-2xl text-on-surface mb-4">Vilcabamba</h3><div class="flex flex-wrap justify-center gap-2 mb-4"><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Panela</span><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Naranja</span><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Cacao</span></div><div class="flex flex-col gap-1 mb-6"><span class="font-body-md text-sm text-on-surface-variant">1.750 msnm</span><span class="font-headline-md text-xl text-primary">$14</span></div><button class="w-full border border-on-surface text-on-surface font-button text-button uppercase py-3 hover:bg-on-surface hover:text-surface transition-colors duration-300">Añadir al carrito</button></div></div><!-- Card 2 --><div class="bg-surface border border-outline-variant p-8 group hover:bg-surface-bright transition-all duration-500 shadow-sm hover:shadow-md hover:-translate-y-1"><div class="aspect-square mb-8 relative overflow-hidden bg-surface-container-low flex items-center justify-center"><div class="w-2/3 h-2/3 bg-primary-container/10 flex items-center justify-center text-primary/20"><span class="material-symbols-outlined text-6xl">coffee_maker</span></div></div><div class="text-center"><span class="font-label-caps text-[10px] text-primary tracking-widest uppercase mb-2 block">Palanda, Ecuador</span><h3 class="font-headline-md text-2xl text-on-surface mb-4">Palanda</h3><div class="flex flex-wrap justify-center gap-2 mb-4"><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Jazmín</span><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Durazno</span><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Miel</span></div><div class="flex flex-col gap-1 mb-6"><span class="font-body-md text-sm text-on-surface-variant">1.900 msnm</span><span class="font-headline-md text-xl text-primary">$16</span></div><button class="w-full border border-on-surface text-on-surface font-button text-button uppercase py-3 hover:bg-on-surface hover:text-surface transition-colors duration-300">Añadir al carrito</button></div></div><!-- Card 3 --><div class="bg-surface border border-outline-variant p-8 group hover:bg-surface-bright transition-all duration-500 shadow-sm hover:shadow-md hover:-translate-y-1"><div class="aspect-square mb-8 relative overflow-hidden bg-surface-container-low flex items-center justify-center"><div class="w-2/3 h-2/3 bg-primary-container/10 flex items-center justify-center text-primary/20"><span class="material-symbols-outlined text-6xl">coffee_maker</span></div></div><div class="text-center"><span class="font-label-caps text-[10px] text-primary tracking-widest uppercase mb-2 block">Intag, Ecuador</span><h3 class="font-headline-md text-2xl text-on-surface mb-4">Intag</h3><div class="flex flex-wrap justify-center gap-2 mb-4"><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Chocolate Negro</span><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Nuez</span><span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-label-caps text-[10px] tracking-wider">Ciruela</span></div><div class="flex flex-col gap-1 mb-6"><span class="font-body-md text-sm text-on-surface-variant">1.600 msnm</span><span class="font-headline-md text-xl text-primary">$15</span></div><button class="w-full border border-on-surface text-on-surface font-button text-button uppercase py-3 hover:bg-on-surface hover:text-surface transition-colors duration-300">Añadir al carrito</button></div></div></div></div></section>
+<!-- Newsletter -->
+<section class="py-section-gap-desktop px-margin-desktop max-w-3xl mx-auto text-center">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Suscríbase a la Experiencia Altura</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-10">
+            Únase a nuestro club para recibir ediciones limitadas, notas de cata exclusivas y acceso anticipado a nuevas cosechas.
+        </p>
+<form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+<div class="flex-grow">
+<label class="sr-only" for="email">Correo electrónico</label>
+<input class="w-full bg-transparent border-b border-outline text-on-surface placeholder-on-surface-variant/50 focus:border-primary focus:ring-0 px-0 py-3 font-body-md text-body-md transition-colors" id="email" placeholder="Su correo electrónico" type="email"/>
+</div>
+<button class="bg-primary-container text-white font-button text-button uppercase px-8 py-3 tracking-widest hover:bg-primary transition-colors duration-300 whitespace-nowrap" type="submit">
+                Suscribirse
+            </button>
+</form>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-low text-on-surface py-section-gap-desktop border-t border-outline-variant w-full">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter px-margin-desktop max-w-[1600px] mx-auto">
+<div class="md:col-span-4 flex flex-col justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary mb-6">ALTURA</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+                        Elevando el estándar del café ecuatoriano. Tostadores de especialidad ubicados en el corazón de los Andes.
+                    </p>
+</div>
+</div>
+<div class="md:col-span-8 flex flex-col md:flex-row justify-end gap-12 md:gap-24 mt-12 md:mt-0">
+<div class="flex flex-col gap-4">
+<h4 class="font-label-caps text-label-caps text-on-surface tracking-widest mb-2">Información</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Envíos y Devoluciones</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Términos de Servicio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacidad</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contacto</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-caps text-label-caps text-on-surface tracking-widest mb-2">Social</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Journal</a>
+</div>
+</div>
+</div>
+<div class="px-margin-desktop max-w-[1600px] mx-auto mt-24 pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center text-sm">
+<p class="font-body-md text-on-surface-variant">© 2024 Altura Café de Especialidad. Quito, Ecuador.</p>
+</div>
+</footer>
+<script>
+        // Simple scroll effect for header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-surface/90', 'backdrop-blur-md', 'border-b', 'border-outline-variant', 'shadow-sm');
+                header.classList.remove('bg-transparent', 'no-border');
+            } else {
+                header.classList.remove('bg-surface/90', 'backdrop-blur-md', 'border-b', 'border-outline-variant', 'shadow-sm');
+                header.classList.add('bg-transparent', 'no-border');
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Altura — Café de especialidad de origen ecuatoriano</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Tostador de café de especialidad de origen ecuatoriano. Granos cultivados en altura en Loja, Zamora-Chinchipe e Intag."
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Las fuentes van con <link> y preconnect, no con @import en el CSS:
+         un @import obliga al navegador a descargar la hoja de estilos antes
+         de descubrir que hay fuentes que pedir, y encadena dos viajes de red. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Bodoni Moda se pide como fuente variable: un solo archivo cubre los ejes
+         de tamaño óptico (6..96), grosor (400..900) y la cursiva. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Public+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Aplica el tema antes del primer pintado. Si esto se hiciera desde
+         Angular, la página se vería un instante en claro antes de saltar a
+         oscuro: el destello blanco que delata a casi toda web con tema. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('altura-theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          /* localStorage bloqueado (modo privado): se queda en tema claro. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

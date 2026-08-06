@@ -1,0 +1,73 @@
+<!--
+  El hero no usa la directiva de revelado: es lo primero que ve el usuario y
+  animarlo retrasaría el mayor elemento de contenido (LCP). Lo que entra al
+  cargar se muestra; lo que hay que bajar a buscar, se revela.
+-->
+<!--
+  `min-h-dvh` y no `h-screen`: en móvil, `100vh` mide la ventana sin la barra de
+  direcciones, que está visible al cargar y se retrae al bajar. El hero salía más
+  alto que la pantalla real y los botones quedaban cortados hasta hacer scroll.
+  `dvh` es la altura dinámica, la que de verdad se ve.
+-->
+<section class="relative flex min-h-dvh w-full items-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <!-- Tres tamaños y que decida el navegador. La foto es de follaje denso, que
+         comprime fatal: a 2000px son 856 KB. Un móvil se lleva la de 800 (147 KB)
+         y nadie descarga píxeles que su pantalla no puede mostrar.
+         `sizes="100vw"` porque la imagen ocupa todo el ancho de la ventana. -->
+    <img
+      src="/images/hero-1400.webp"
+      srcset="/images/hero-800.webp 800w, /images/hero-1400.webp 1400w, /images/hero-2000.webp 2000w"
+      sizes="100vw"
+      alt="Plantación en terrazas sobre una ladera de montaña, con las cumbres entre nubes al fondo"
+      class="h-full w-full object-cover"
+      fetchpriority="high"
+    />
+    <!-- Degradado en diagonal, no un velo plano: oscurece la esquina donde vive
+         el texto y deja el cielo y las cumbres casi limpios. Un overlay uniforme
+         daría el mismo contraste apagando la fotografía entera. -->
+    <div class="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/45 to-black/10"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto w-full max-w-[1600px] px-6 lg:px-20">
+    <div class="flex max-w-[640px] flex-col gap-8">
+      <span class="text-xs font-semibold uppercase tracking-[0.2em] text-white">
+        Tostado en Loja, Ecuador
+      </span>
+
+      <!-- El texto del hero va en blanco fijo y no en tokens: sobre una
+           fotografía con overlay oscuro, el fondo es el mismo en ambos temas. -->
+      <!-- El salto de línea solo existe a partir de `sm`. En 375px, forzarlo
+           dejaba "El café crece mejor" partido en dos por falta de sitio y el
+           titular caía en cuatro líneas desiguales. -->
+      <h1 class="font-display text-4xl leading-[1.1] tracking-tight text-white sm:text-5xl md:text-7xl">
+        El café crece mejor<br class="hidden sm:inline" />
+        donde el aire es delgado
+      </h1>
+
+      <p class="max-w-xl text-lg leading-relaxed text-white/90">
+        Descubra granos de origen único cultivados a más de 1.800 metros, donde la altitud y el
+        clima volcánico crean perfiles de sabor que cambian de cosecha en cosecha.
+      </p>
+
+      <div class="mt-4 flex flex-wrap gap-4">
+        <a
+          href="#coleccion"
+          class="cursor-pointer whitespace-nowrap bg-brand px-8 py-4 text-sm font-semibold uppercase tracking-[0.1em] text-on-brand transition-colors duration-300 hover:bg-brand-hover"
+        >
+          Ver la colección
+        </a>
+        <!-- Fondo blanco sólido, no solo un borde: sobre fotografía, un botón
+             translúcido obliga al usuario a descubrirlo antes de poder usarlo.
+             Usa los tokens `on-photo`, que no cambian con el tema: el fondo de
+             este botón es la foto, no la página. -->
+        <a
+          href="#origen"
+          class="cursor-pointer whitespace-nowrap bg-on-photo-surface px-8 py-4 text-sm font-semibold uppercase tracking-[0.1em] text-on-photo-ink shadow-sm transition-opacity duration-300 hover:opacity-90"
+        >
+          Conocer el origen
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

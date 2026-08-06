@@ -1,0 +1,60 @@
+<section id="tueste" class="overflow-hidden bg-surface-alt py-section-sm md:py-section">
+  <div class="mx-auto max-w-[1600px] px-6 lg:px-20">
+    <div class="mb-16 text-center md:mb-24">
+      <h2 appRevealOnScroll class="font-display text-4xl tracking-tight text-brand md:text-5xl">
+        El Arte del Tueste
+      </h2>
+    </div>
+
+    <div class="relative">
+      <!-- La línea de conexión solo existe en escritorio. En móvil los pasos se
+           apilan y una línea horizontal no uniría nada: sería decoración. -->
+      <div class="absolute left-0 top-[24px] z-0 hidden h-px w-full bg-brand/25 md:block"></div>
+
+      <ol class="relative z-10 grid grid-cols-1 gap-12 md:grid-cols-4 md:gap-8">
+        @for (step of steps; track step.number; let i = $index) {
+          <li [appRevealOnScroll]="i" class="flex flex-col items-center md:items-start">
+            <div class="mb-6 flex items-center gap-4">
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-full border border-brand bg-surface text-brand shadow-sm"
+              >
+                @switch (step.icon) {
+                  @case ('droplet') {
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z" />
+                    </svg>
+                  }
+                  @case ('fire') {
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 2c1 3-1 4-2 6s0 4 2 4 3-2 2-4c2 1 4 3 4 6a6 6 0 1 1-12 0c0-4 4-7 6-12z" />
+                    </svg>
+                  }
+                  @case ('bean') {
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                      <ellipse cx="12" cy="12" rx="6" ry="9" transform="rotate(35 12 12)" />
+                      <path d="M8.5 6.5c3 3 4 8 3.5 11.5" />
+                    </svg>
+                  }
+                  @case ('snow') {
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                      <path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19" />
+                    </svg>
+                  }
+                }
+              </span>
+              <span class="font-display text-4xl text-brand/25">{{ step.number }}</span>
+            </div>
+
+            <div class="flex flex-col gap-3 text-center md:text-left">
+              <span class="text-xs font-semibold uppercase tracking-[0.15em] text-brand">
+                {{ step.temperature }}
+              </span>
+              <h3 class="font-display text-2xl text-ink">{{ step.title }}</h3>
+              <p class="max-w-[240px] text-ink-muted">{{ step.description }}</p>
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+  </div>
+</section>

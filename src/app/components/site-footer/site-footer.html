@@ -1,0 +1,54 @@
+<footer class="bg-footer-surface py-section-sm text-footer-ink md:py-section">
+  <div class="mx-auto max-w-[1600px] px-6 lg:px-20">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-12">
+      <div class="md:col-span-4">
+        <p class="mb-6 font-display text-3xl">ALTURA</p>
+        <p class="max-w-sm text-footer-muted">
+          Café de especialidad de origen ecuatoriano. Tostadores en el corazón de los Andes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8 md:col-span-8 md:grid-cols-3 md:gap-12">
+        @for (column of columns; track column.title) {
+          <nav [attr.aria-label]="column.title" class="flex flex-col gap-4">
+            <h2 class="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-footer-ink">
+              {{ column.title }}
+            </h2>
+            @for (link of column.links; track link) {
+              <!-- Los enlaces del pie usan `footer-muted`, que mantiene 4.5:1
+                   sobre el fondo. El gris apagado de casi todos los pies de
+                   página baja de ese umbral y deja el bloque ilegible. -->
+              <a
+                href="#"
+                class="text-footer-muted transition-colors duration-200 hover:text-footer-ink"
+              >
+                {{ link }}
+              </a>
+            }
+          </nav>
+        }
+      </div>
+    </div>
+
+    <div
+      class="mt-16 flex flex-col items-center justify-between gap-6 border-t border-footer-border pt-8 text-sm md:flex-row"
+    >
+      <p class="text-footer-muted">
+        © {{ year }} Altura Café de Especialidad. Loja, Ecuador.
+      </p>
+
+      <ul class="flex gap-4">
+        @for (social of ['Instagram', 'Journal', 'Contacto']; track social) {
+          <li>
+            <a
+              href="#"
+              class="link-underline text-footer-muted transition-colors duration-200 hover:text-footer-ink"
+            >
+              {{ social }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</footer>

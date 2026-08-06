@@ -1,0 +1,53 @@
+<section id="origen" class="bg-background py-section-sm md:py-section">
+  <div class="mx-auto max-w-[1600px] px-6 lg:px-20">
+    <!-- Asimétrico a propósito: 5 columnas de texto contra 7 de fotografía.
+         Un 50/50 daría una página correcta y sin carácter; la desigualdad es
+         lo que hace que se lea como una doble página de revista. -->
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="flex flex-col gap-8 lg:col-span-5">
+        <div appRevealOnScroll class="flex flex-col gap-4">
+          <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Capítulo 01</span>
+          <h2 class="font-display text-4xl leading-[1.1] tracking-tight text-ink md:text-5xl">
+            1.800 metros sobre el nivel del mar
+          </h2>
+        </div>
+
+        <div appRevealOnScroll="1" class="flex flex-col gap-6 text-lg leading-relaxed text-ink-muted">
+          <p>
+            En las cumbres de Loja, el aire se vuelve más ligero y el tiempo parece transcurrir a
+            otro ritmo. A esta altitud extrema, la presión atmosférica y las temperaturas frescas
+            obligan a los cafetos a concentrar toda su energía en la protección de sus semillas.
+          </p>
+          <p>
+            Este proceso de maduración lenta permite que los azúcares naturales se desarrollen con
+            una densidad excepcional, resultando en granos con una complejidad aromática y una
+            dulzura que la altura hace posible.
+          </p>
+        </div>
+
+        <!-- Metadata Block: la ficha técnica que propuso Stitch. -->
+        <dl appRevealOnScroll="2" class="grid grid-cols-3 gap-8 border-t border-border pt-8">
+          @for (stat of stats; track stat.label) {
+            <div class="flex flex-col gap-2">
+              <dt class="order-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-ink-muted">
+                {{ stat.label }}
+              </dt>
+              <dd class="order-1 font-display text-3xl text-brand">{{ stat.value }}</dd>
+            </div>
+          }
+        </dl>
+      </div>
+
+      <div appRevealOnScroll="1" class="lg:col-span-7">
+        <div class="relative aspect-[4/5] w-full overflow-hidden shadow-xl">
+          <img
+            src="/images/origin.webp"
+            alt="Ladera de una finca de café en los Andes ecuatorianos, con la niebla cubriendo las cumbres"
+            class="photo-print h-full"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
