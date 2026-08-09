@@ -227,13 +227,12 @@ Pablo el 2026-08-06.
 
 **Lo que queda, en orden:**
 
-1. **Decidir si esto va a Git.** El proyecto no es un repositorio todavía. Si se
-   sube a GitHub, hay que preguntar antes el nombre y la visibilidad.
-2. **Ingerir al vault.** Es lo más valioso que ha dejado este proyecto: hay
-   material real sobre cómo se comporta Stitch que no está documentado en
-   ninguna de las páginas actuales del wiki, y ahora también hay material
-   sobre auditar diseño con el método Rams y sobre Signal Forms en Angular 21.
-   Ver la sección siguiente.
+1. ~~Decidir si esto va a Git.~~ Resuelto: el proyecto está en GitHub como
+   `github.com/pabloarmijos11/altura-landing`.
+2. ~~Ingerir al vault.~~ Resuelto el 2026-08-06 (commit `57682de` del vault,
+   "Ingerir prueba-stich"): el material sobre Google Stitch, la auditoría con
+   el método Rams y Signal Forms ya está en el vault. Ver la sección
+   siguiente para el detalle de dónde vivía cada cosa.
 
 **Para el vault, cuando se cierre el proyecto**, el material está en:
 - `stitch/exports/01-identidad-base/NOTAS.md` — qué respetó, qué se desvió y qué
