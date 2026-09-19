@@ -1,7 +1,7 @@
 # Prompt de traspaso para /make-plan
 
 ````
-/make-plan Redesign la capa de interacción y contenido de la landing "Altura" (tostador ficticio de café ecuatoriano, Angular 21 + Tailwind v4, repo en C:\Users\ASUS\Documents\PERSONAL\PROYECTOS\prueba-stich). El diseño actual falló la auditoría en 15/30 con brechas críticas en los principios #8 (minucioso) y #10 (lo mínimo posible).
+/make-plan Redesign la capa de interacción y contenido de la landing "Altura" (tostador ficticio de café ecuatoriano, Angular 21 + Tailwind v4). El diseño actual falló la auditoría en 15/30 con brechas críticas en los principios #8 (minucioso) y #10 (lo mínimo posible).
 
 Veredicto (citado del audit):
 > La página tiene un sistema de tokens limpio, accesibilidad cuidada y un peso de página respetable, pero pierde honestidad y utilidad frente al usuario porque más de un tercio de sus elementos interactivos (carrito, enlaces del pie) no hacen nada, faltan cuatro de seis estados de interfaz básicos, y el copy se apoya en cinco superlativos sin respaldo — por eso el veredicto es REDESIGN, no un simple pulido.

@@ -1,8 +1,7 @@
 # Scope — Auditoría Dieter Rams, Altura
 
 **Qué se audita:** landing de una sola página de "Altura" (tostador ficticio de café
-de especialidad ecuatoriano), repo en
-`C:\Users\ASUS\Documents\PERSONAL\PROYECTOS\prueba-stich`.
+de especialidad ecuatoriano), en la raíz de este repositorio.
 
 - Código fuente en `src/app/components/` (site-header, hero, origin, roast, roots,
   collection, brew, subscribe, site-footer) y `src/app/app.html`, que las apila.

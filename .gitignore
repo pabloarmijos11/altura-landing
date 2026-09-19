@@ -46,3 +46,10 @@ Thumbs.db
 # Python (scripts/contraste.py)
 __pycache__/
 *.pyc
+
+# Vercel — `vercel link` escribe aquí los ids de proyecto y organización.
+# No son secretos, pero son estado por máquina, no parte del proyecto.
+.vercel
+
+.vercel
+.env*
