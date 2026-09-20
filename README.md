@@ -3,6 +3,8 @@
 Landing page de una sola página para **Altura**, un tostador ficticio de café de
 especialidad de origen ecuatoriano.
 
+**Demo: https://altura-landing-nine.vercel.app**
+
 Es un proyecto de práctica. Su propósito no es la marca sino el proceso: probar
 **Google Stitch** como herramienta de diseño de interfaces y llevar el peso del
 trabajo al diseño visual en vez de a la lógica. No tiene backend — el formulario de
@@ -35,7 +37,7 @@ npm run build
 ## Estructura
 
 ```
-prueba-stich/
+altura-landing/
 ├─ CLAUDE.md                  # instrucciones para el agente
 ├─ design-system/altura/
 │  └─ MASTER.md               # fuente de verdad del diseño: color, tipografía,
@@ -50,10 +52,10 @@ prueba-stich/
       ├─ app.html             # apila las secciones; no hay routing
       ├─ components/          # una carpeta por sección
       ├─ directives/          # reveal-on-scroll
-      └─ services/            # theme.service
+      └─ services/            # theme.ts — el tema claro/oscuro, en un signal
 ```
 
-## Las siete secciones
+## Las ocho secciones
 
 La página sigue un patrón de narración por scroll: cuenta el recorrido del café desde
 la finca hasta la taza.
@@ -61,10 +63,14 @@ la finca hasta la taza.
 1. **Hero** — la marca y su claim
 2. **El origen** — altitud y fincas
 3. **El tueste** — el proceso, en línea de tiempo
-4. **La colección** — los tres cafés
-5. **Tu método** — V60, prensa francesa, espresso
-6. **Suscripción** — la llamada a la acción
-7. **Footer**
+4. **Nuestras Raíces** — la historia de la marca
+5. **Colección de Origen** — los tres cafés
+6. **Tu método** — V60, prensa francesa, espresso
+7. **Suscripción** — la llamada a la acción
+8. **Footer**
+
+*Nuestras Raíces* no estaba en el plan: la añadió Stitch por su cuenta al generar el
+diseño. Se quedó porque la narración lo pedía.
 
 ## Diseño
 
@@ -73,7 +79,7 @@ con la skill `ui-ux-pro-max` y corregido a mano. Ese archivo incluye una tabla d
 overrides que explica qué se descartó de la salida automática de la herramienta y por
 qué — es la parte más útil para entender el criterio detrás de la página.
 
-**Tipografía:** Libre Bodoni para titulares, Public Sans para el cuerpo.
+**Tipografía:** Bodoni Moda para titulares, Public Sans para el cuerpo.
 **Color:** marrón de tueste sobre crema, con paleta completa para modo oscuro.
 
 La página funciona en modo claro y oscuro, es responsive de 375px a 1440px y respeta
@@ -82,3 +88,10 @@ La página funciona en modo claro y oscuro, es responsive de 375px a 1440px y re
 ## Créditos
 
 Fotografía de [Unsplash](https://unsplash.com), bajo su licencia de uso libre.
+
+Altura es una marca ficticia, creada para este ejercicio. No existe el tostador ni
+los cafés que aparecen en la página.
+
+## Licencia
+
+[MIT](LICENSE).

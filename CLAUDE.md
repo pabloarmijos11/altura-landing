@@ -171,6 +171,38 @@ terminado.
 Toda imagen necesita `width`/`height` o `aspect-ratio` para no provocar CLS, y
 `loading="lazy"` salvo la del hero.
 
+## Despliegue
+
+En producción desde el 2026-09-20: **https://altura-landing-nine.vercel.app**
+
+Esa URL es un **dominio de proyecto**, no un alias. La diferencia importa: un alias
+creado con `vercel alias set` queda clavado al despliegue que existía en ese momento
+y seguiría sirviendo el build viejo para siempre, sin avisar. Si algún día hay que
+añadir otro dominio, va con `add_project_domain`, nunca con `vercel alias set`.
+(El sufijo `-nine` lo puso Vercel porque `altura-landing.vercel.app` ya estaba
+cogido globalmente.)
+
+**El despliegue es manual**: `vercel deploy --prod --yes`. No hay CI, y un push a
+`master` no actualiza producción.
+
+**`vercel link` escribe un `.env.local` con un `VERCEL_OIDC_TOKEN`** de 12 horas.
+Este proyecto no lo usa para nada —no hay backend ni servicio externo al que
+autenticarse—, así que se borra. Está cubierto por `.env*` en el `.gitignore`, pero
+es una credencial menos en disco.
+
+### Una ruta inventada devuelve 200, no 404
+
+El `vercel.json` omite el `rewrites` a propósito, y el commit que lo introdujo
+afirma que así una ruta inexistente daría 404 en vez de servir la portada.
+**Es falso, comprobado en producción**: `/no-existe` devuelve 200 con la landing
+entera. El preset `framework: "angular"` de Vercel aplica su propio fallback a
+`index.html` aunque no se lo pidas; omitir `rewrites` no lo desactiva.
+
+Se deja así: para una landing sin routing el efecto práctico es nulo, y el único
+coste es que un buscador podría indexar URLs duplicadas. Queda escrito aquí porque
+el mensaje de aquel commit ya no se puede corregir —está pusheado— y sin esta nota
+la siguiente persona que lo lea creería algo que no es cierto.
+
 ## Estado del proyecto
 
 - [x] Fase A — sistema de diseño persistido y corregido
@@ -190,8 +222,9 @@ Toda imagen necesita `width`/`height` o `aspect-ratio` para no provocar CLS, y
       de la capa de interacción y contenido, no de la identidad visual — ver
       `DESIGN-IS-2026-08-06/`) ya ejecutados. El plan de redesign
       (`plans/01-redesign-interaccion-contenido.md`, 5 fases) está implementado
-      por completo. Queda pendiente la verificación visual en navegador real —
-      ver más abajo.
+      por completo y verificado en navegador real.
+- [x] Fase H — publicación (2026-09-20): licencia MIT, README corregido,
+      `vercel.json` y despliegue en producción. Ver «Despliegue» más arriba.
 
 ---
 
