@@ -1,0 +1,452 @@
+<meta charset="utf-8">
+<title>Altura — Informe Técnico</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  @page :first { margin: 0; }
+
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  :root {
+    --ink:    #2a1a10;
+    --muted:  #6b5545;
+    --line:   #e8dccb;
+    --brand:  #6b3410;
+    --accent: #92400e;
+    --soft:   #fdf6e9;
+    --code:   #faf5ec;
+  }
+
+  body { font-family: "Segoe UI", -apple-system, system-ui, sans-serif;
+         color: var(--ink); font-size: 10.2pt; line-height: 1.55; margin: 0; }
+
+  /* ---------- Portada ---------- */
+  .cover {
+    height: 297mm; padding: 46mm 22mm 20mm;
+    background: linear-gradient(160deg, #2a1a10 0%, #6b3410 58%, #92400e 100%);
+    color: #fdfbf7; page-break-after: always; display: flex; flex-direction: column;
+  }
+  .cover .mark { font-size: 40pt; line-height: 1; margin-bottom: 10mm; }
+  .cover h1 { font-size: 36pt; margin: 0 0 4mm; font-weight: 400;
+              font-family: "Bodoni MT", Didot, "Times New Roman", serif; letter-spacing: 0.5pt; }
+  .cover .sub { font-size: 13pt; opacity: .88; font-weight: 300; margin-bottom: 16mm; }
+  .cover .rule { width: 46mm; height: 2.5pt; background: rgba(255,255,255,.5); margin-bottom: 12mm; }
+  .cover dl { display: grid; grid-template-columns: 26mm 1fr; gap: 3mm 6mm; font-size: 10pt; margin: 0; }
+  .cover dt { opacity: .7; text-transform: uppercase; letter-spacing: .8pt; font-size: 8pt; padding-top: 1.2pt; }
+  .cover dd { margin: 0; }
+  .cover .foot { margin-top: auto; font-size: 8.5pt; opacity: .65; }
+
+  /* ---------- Cuerpo ---------- */
+  h2 { font-size: 15pt; color: var(--brand); margin: 9mm 0 3mm;
+       padding-bottom: 1.6mm; border-bottom: 1.6pt solid var(--accent); page-break-after: avoid; }
+  h2:first-of-type { margin-top: 0; }
+  h3 { font-size: 11.4pt; color: var(--brand); margin: 6mm 0 2mm; page-break-after: avoid; }
+  p { margin: 0 0 3mm; text-align: justify; }
+
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0 5mm; font-size: 9.2pt; page-break-inside: avoid; }
+  th { background: var(--brand); color: #fff; text-align: left; padding: 2mm 2.6mm; font-weight: 600; font-size: 8.8pt; }
+  td { padding: 2mm 2.6mm; border-bottom: .6pt solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--soft); }
+  td.num { text-align: center; font-variant-numeric: tabular-nums; width: 14mm; }
+
+  code { font-family: Consolas, "Courier New", monospace; font-size: .89em; background: var(--code);
+         padding: .4mm 1.1mm; border-radius: 2px; color: #6b3410; }
+  pre { background: #221610; color: #ece0d2; padding: 3.2mm 4mm; border-radius: 3px;
+        font-family: Consolas, "Courier New", monospace; font-size: 8.3pt; line-height: 1.5;
+        white-space: pre-wrap; margin: 2mm 0 4mm; page-break-inside: avoid; }
+  pre .c { color: #b09a86; }
+  pre .k { color: #e0a75e; }
+  pre .s { color: #b9e6a8; }
+  pre .w { color: #ffc98b; }
+
+  figure { margin: 4mm 0 5mm; page-break-inside: avoid; text-align: center; }
+  figure svg { max-width: 100%; height: auto; }
+  figcaption { font-size: 8.3pt; color: var(--muted); margin-top: 2mm; text-align: center; }
+
+  .callout { border-left: 2.6pt solid var(--accent); background: var(--soft);
+             padding: 2.6mm 4mm; margin: 3mm 0 4mm; page-break-inside: avoid; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .lbl { font-weight: 700; color: var(--brand); }
+
+  .break { page-break-before: always; }
+  ul { margin: 0 0 3mm; padding-left: 5mm; }
+  li { margin-bottom: 1.4mm; }
+</style>
+
+<!-- ========================= PORTADA ========================= -->
+<div class="cover">
+  <div class="mark">☕</div>
+  <h1>Altura</h1>
+  <div class="sub">Landing page de una marca de café · diseño con Google Stitch<br>Informe técnico</div>
+  <div class="rule"></div>
+  <dl>
+    <dt>Autor</dt><dd>Pablo Nicolás Armijos Sánchez</dd>
+    <dt>Demo</dt><dd>altura-landing-nine.vercel.app</dd>
+    <dt>Repositorio</dt><dd>github.com/pabloarmijos11/altura-landing</dd>
+    <dt>Stack</dt><dd>Angular 21.2 · Tailwind CSS 4 · Signal Forms · IntersectionObserver · Vercel</dd>
+    <dt>Licencia</dt><dd>MIT</dd>
+    <dt>Fecha</dt><dd>21 de septiembre de 2026</dd>
+  </dl>
+  <div class="foot">8 secciones · 33 comprobaciones de contraste WCAG · auditoría de diseño y rediseño ejecutado</div>
+</div>
+
+<!-- ========================= 1 ========================= -->
+<h2>1. Contexto y objetivos</h2>
+
+<p><strong>Altura</strong> es la landing de un tostador ficticio de café de especialidad
+ecuatoriano. La marca no existe, y eso es deliberado: el objeto de estudio no era el producto
+sino el <em>método</em>. Dos preguntas concretas guiaron el trabajo.</p>
+
+<p><strong>La primera:</strong> ¿sirve <em>Google Stitch</em> —una herramienta que genera
+interfaces a partir de descripciones en lenguaje natural— como punto de partida real de un
+diseño, o solo produce pantallas presentables que hay que rehacer? <strong>La segunda:</strong>
+¿qué hace falta para que un diseño generado por una herramienta se convierta en código
+mantenible, en lugar de en un montón de valores sueltos copiados a mano?</p>
+
+<p>A diferencia de los otros dos proyectos de este portafolio, aquí el peso no está en la lógica
+—no hay backend, ni base de datos, ni sesión— sino en las decisiones visuales y en cómo se
+documentan. El repositorio conserva el proceso completo: los prompts enviados, lo que devolvió
+cada uno, qué se aceptó, qué se rechazó y por qué.</p>
+
+<table>
+  <tr><th style="width:36%">Objetivo</th><th>Cómo se cumple</th></tr>
+  <tr><td>Evaluar Stitch con criterio</td><td>Iteración documentada por secciones, con notas de lo aceptado y lo rechazado en cada una.</td></tr>
+  <tr><td>Diseño reproducible</td><td>Un sistema de tokens como fuente única de verdad; ningún componente declara un color crudo.</td></tr>
+  <tr><td>Accesibilidad comprobable</td><td>Verificador de contraste propio: 33 comprobaciones sobre los tokens reales.</td></tr>
+  <tr><td>Movimiento sin dependencias</td><td><code>IntersectionObserver</code> y transiciones CSS en lugar de una librería de animación.</td></tr>
+  <tr><td>Someter el resultado a crítica</td><td>Auditoría contra los diez principios de Dieter Rams y ejecución del rediseño que exigió (sección 7).</td></tr>
+</table>
+
+<!-- ========================= 2 ========================= -->
+<h2>2. El método: de un prompt a un componente</h2>
+
+<p>El flujo tiene cuatro etapas, y la tercera es la que decide si el resultado es mantenible:
+ninguna salida de la herramienta llega al código directamente. Todo pasa antes por el sistema de
+diseño, donde se acepta, se descarta o se traduce a un token.</p>
+
+<figure>
+<svg viewBox="0 0 780 250" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+  <defs>
+    <marker id="f1" markerWidth="9" markerHeight="9" refX="8" refY="3.2" orient="auto">
+      <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#92400e"/>
+    </marker>
+    <marker id="f2" markerWidth="9" markerHeight="9" refX="8" refY="3.2" orient="auto">
+      <path d="M0,0 L8,3.2 L0,6.4 Z" fill="#c0392b"/>
+    </marker>
+  </defs>
+
+  <rect x="10" y="44" width="150" height="62" rx="6" fill="#fdf6e9" stroke="#92400e" stroke-width="1.4"/>
+  <text x="85" y="68" text-anchor="middle" font-size="11.5" fill="#6b3410" font-weight="600">prompts.md</text>
+  <text x="85" y="85" text-anchor="middle" font-size="8.8" fill="#8a6a50">lo que se le pidió</text>
+  <text x="85" y="98" text-anchor="middle" font-size="8.8" fill="#8a6a50">a la herramienta</text>
+
+  <line x1="160" y1="75" x2="196" y2="75" stroke="#92400e" stroke-width="1.7" marker-end="url(#f1)"/>
+
+  <rect x="200" y="44" width="160" height="62" rx="6" fill="#fdf6e9" stroke="#92400e" stroke-width="1.4"/>
+  <text x="280" y="68" text-anchor="middle" font-size="11.5" fill="#6b3410" font-weight="600">stitch/exports/</text>
+  <text x="280" y="85" text-anchor="middle" font-size="8.8" fill="#8a6a50">8 secciones: capturas,</text>
+  <text x="280" y="98" text-anchor="middle" font-size="8.8" fill="#8a6a50">HTML y notas</text>
+
+  <line x1="360" y1="75" x2="396" y2="75" stroke="#92400e" stroke-width="1.7" marker-end="url(#f1)"/>
+
+  <rect x="400" y="30" width="180" height="90" rx="6" fill="#6b3410"/>
+  <text x="490" y="54" text-anchor="middle" font-size="11.5" fill="#fff" font-weight="600">MASTER.md</text>
+  <text x="490" y="71" text-anchor="middle" font-size="8.8" fill="#e8c9a8">el filtro de criterio:</text>
+  <text x="490" y="85" text-anchor="middle" font-size="8.8" fill="#e8c9a8">se acepta, se rechaza</text>
+  <text x="490" y="99" text-anchor="middle" font-size="8.8" fill="#e8c9a8">o se traduce a token</text>
+  <text x="490" y="113" text-anchor="middle" font-size="8" fill="#c9a483">fuente única de verdad</text>
+
+  <line x1="580" y1="75" x2="616" y2="75" stroke="#92400e" stroke-width="1.7" marker-end="url(#f1)"/>
+
+  <rect x="620" y="44" width="150" height="62" rx="6" fill="#fdf6e9" stroke="#92400e" stroke-width="1.4"/>
+  <text x="695" y="68" text-anchor="middle" font-size="11.5" fill="#6b3410" font-weight="600">styles.css</text>
+  <text x="695" y="85" text-anchor="middle" font-size="8.8" fill="#8a6a50">tokens en @theme</text>
+  <text x="695" y="98" text-anchor="middle" font-size="8.8" fill="#8a6a50">→ los componentes</text>
+
+  <!-- rechazo -->
+  <path d="M470,120 L470,166" stroke="#c0392b" stroke-width="1.6" fill="none" marker-end="url(#f2)" stroke-dasharray="5 3"/>
+  <rect x="300" y="170" width="340" height="62" rx="6" fill="#fdf0ee" stroke="#c0392b" stroke-width="1.2"/>
+  <text x="470" y="190" text-anchor="middle" font-size="10" fill="#a5342a" font-weight="600">Descartado, con el motivo escrito</text>
+  <text x="470" y="206" text-anchor="middle" font-size="8.8" fill="#b5564c">la paleta Material Design que Stitch inyectó por su cuenta,</text>
+  <text x="470" y="220" text-anchor="middle" font-size="8.8" fill="#b5564c">su azul ajeno a la marca, su fondo de tinte rosado</text>
+
+  <text x="10" y="196" font-size="9" fill="#8a6a50">Nada llega al código</text>
+  <text x="10" y="210" font-size="9" fill="#8a6a50">sin pasar por el filtro.</text>
+</svg>
+<figcaption><strong>Figura 1</strong> — Del prompt al componente. El sistema de diseño actúa como
+filtro, no como archivo de paso.</figcaption>
+</figure>
+
+<!-- ========================= 3 ========================= -->
+<div class="break"></div>
+<h2>3. Criterio frente a automatización</h2>
+
+<p>La parte más útil del proyecto no es lo que las herramientas generaron, sino lo que se
+descartó de ellas. Ambas —la skill de diseño que produjo el sistema inicial y Stitch después—
+proponen con seguridad cosas que no encajan, y aceptarlas por inercia es la diferencia entre
+usar una herramienta y ser usado por ella.</p>
+
+<table>
+  <tr><th style="width:24%">Lo generado</th><th style="width:22%">Lo que se usó</th><th>Por qué</th></tr>
+  <tr><td>Tipografía Fredoka / Nunito</td><td><strong>Bodoni Moda / Public Sans</strong></td>
+      <td>Fredoka está catalogada para aplicaciones infantiles y juegos. Un café de especialidad es un producto premium y editorial: pide un serif de alto contraste.</td></tr>
+  <tr><td>Fondo <code>#FEF3C7</code></td><td><strong><code>#FDFBF7</code></strong></td>
+      <td>Un amarillo saturado como lienzo de página entera compite con la fotografía de producto y fatiga en un scroll largo. El crema saturado se reserva para secciones de acento.</td></tr>
+  <tr><td>Patrón «Horizontal Scroll Journey»</td><td><strong>Narración vertical por capítulos</strong></td>
+      <td>El scroll horizontal en móvil es hostil y rompe el gesto natural. La narrativa vertical consigue lo mismo sin pelearse con el usuario.</td></tr>
+  <tr><td>Animación con GSAP</td><td><strong><code>IntersectionObserver</code> + CSS</strong></td>
+      <td>Unos 50 KB de librería para apariciones escalonadas que se resuelven con una directiva de treinta líneas.</td></tr>
+</table>
+
+<h3>3.1 El sesgo de la herramienta, visible bajo el prompt</h3>
+
+<p>Stitch inyectó por su cuenta una paleta completa de Material Design —<code>surface-container-*</code>,
+<code>inverse-primary</code>, variantes <code>*-fixed</code>— y un color terciario azul
+(<code>#00446D</code>) sin ninguna relación con una marca de café. Es el sesgo de la herramienta
+asomando por debajo de la petición: Stitch es de Google, y Material es su lenguaje por defecto.</p>
+
+<p>Se aceptó de Stitch lo que mejoraba la propuesta inicial: Bodoni Moda en lugar de Libre
+Bodoni, sombras muy difusas de baja opacidad, el cambio de fondo en lugar de elevación al pasar
+el cursor sobre una tarjeta, la fotografía sin esquinas redondeadas. Se rechazó lo que venía de
+su propio catálogo y no del problema.</p>
+
+<div class="callout">
+  <p><span class="lbl">Un hallazgo que conviene recordar.</span> El archivo de especificación que
+  devuelve Stitch <strong>se contradice a sí mismo</strong>: la cabecera estructurada y la prosa
+  declaran valores distintos para el fondo y los bordes. Quien copie un color de ahí sin
+  contrastar ambos bloques introducirá un valor que la propia herramienta desmiente dos párrafos
+  más abajo.</p>
+</div>
+
+<!-- ========================= 4 ========================= -->
+<h2>4. El sistema de tokens</h2>
+
+<p>Los colores se declaran una sola vez como variables CSS y se exponen a Tailwind mediante
+<code>@theme inline</code>. Ese <code>inline</code> no es decorativo: sin él, las utilidades
+compilarían el valor del tema claro y lo dejarían congelado en tiempo de compilación, de modo que
+el modo oscuro no cambiaría nada.</p>
+
+<figure>
+<svg viewBox="0 0 780 290" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
+  <!-- claro -->
+  <rect x="10" y="14" width="370" height="128" rx="6" fill="#fdfbf7" stroke="#e8dccb" stroke-width="1.4"/>
+  <text x="26" y="36" font-size="10" fill="#6b5545" letter-spacing="1.2">MODO CLARO</text>
+  <g>
+    <rect x="26" y="48" width="46" height="34" rx="3" fill="#fdfbf7" stroke="#d8ccba"/>
+    <rect x="80" y="48" width="46" height="34" rx="3" fill="#fdf6e9" stroke="#d8ccba"/>
+    <rect x="134" y="48" width="46" height="34" rx="3" fill="#92400e"/>
+    <rect x="188" y="48" width="46" height="34" rx="3" fill="#4f6f52"/>
+    <rect x="242" y="48" width="46" height="34" rx="3" fill="#2a1a10"/>
+    <rect x="296" y="48" width="46" height="34" rx="3" fill="#6b5545"/>
+  </g>
+  <text x="26" y="94" font-size="7.6" fill="#6b5545">bg</text>
+  <text x="80" y="94" font-size="7.6" fill="#6b5545">surface-alt</text>
+  <text x="134" y="94" font-size="7.6" fill="#6b5545">brand</text>
+  <text x="188" y="94" font-size="7.6" fill="#6b5545">accent</text>
+  <text x="242" y="94" font-size="7.6" fill="#6b5545">ink</text>
+  <text x="296" y="94" font-size="7.6" fill="#6b5545">ink-muted</text>
+  <text x="26" y="116" font-size="8.8" fill="#2a1a10">Marrón de tueste sobre crema.</text>
+  <text x="26" y="130" font-size="8.8" fill="#6b5545">Texto principal: 16.21:1 sobre el fondo.</text>
+
+  <!-- oscuro -->
+  <rect x="400" y="14" width="370" height="128" rx="6" fill="#17110d" stroke="#3a2c22" stroke-width="1.4"/>
+  <text x="416" y="36" font-size="10" fill="#b8a695" letter-spacing="1.2">MODO OSCURO</text>
+  <g>
+    <rect x="416" y="48" width="46" height="34" rx="3" fill="#17110d" stroke="#4a3c32"/>
+    <rect x="470" y="48" width="46" height="34" rx="3" fill="#2b211a" stroke="#4a3c32"/>
+    <rect x="524" y="48" width="46" height="34" rx="3" fill="#d98a4e"/>
+    <rect x="578" y="48" width="46" height="34" rx="3" fill="#8fb393"/>
+    <rect x="632" y="48" width="46" height="34" rx="3" fill="#f2e9df"/>
+    <rect x="686" y="48" width="46" height="34" rx="3" fill="#b8a695"/>
+  </g>
+  <text x="416" y="94" font-size="7.6" fill="#b8a695">bg</text>
+  <text x="470" y="94" font-size="7.6" fill="#b8a695">surface-alt</text>
+  <text x="524" y="94" font-size="7.6" fill="#b8a695">brand</text>
+  <text x="578" y="94" font-size="7.6" fill="#b8a695">accent</text>
+  <text x="632" y="94" font-size="7.6" fill="#b8a695">ink</text>
+  <text x="686" y="94" font-size="7.6" fill="#b8a695">ink-muted</text>
+  <text x="416" y="116" font-size="8.8" fill="#f2e9df">No reutiliza los hex del claro.</text>
+  <text x="416" y="130" font-size="8.8" fill="#b8a695">Un token es un rol, no un color fijo.</text>
+
+  <!-- invariantes -->
+  <rect x="10" y="158" width="760" height="120" rx="6" fill="#fff8ec" stroke="#e0a75e" stroke-width="1.4"/>
+  <text x="26" y="180" font-size="10" fill="#96702f" letter-spacing="1.2">TOKENS QUE NO CAMBIAN CON EL TEMA — Y ESO ES LO CORRECTO</text>
+
+  <rect x="26" y="192" width="230" height="70" rx="4" fill="#fff" stroke="#e0a75e"/>
+  <text x="141" y="211" text-anchor="middle" font-size="10.5" fill="#7a5717" font-weight="600">on-photo-*</text>
+  <text x="141" y="228" text-anchor="middle" font-size="8.6" fill="#96702f">Viven sobre fotografía, que se ve</text>
+  <text x="141" y="241" text-anchor="middle" font-size="8.6" fill="#96702f">igual en ambos temas. Un token que</text>
+  <text x="141" y="254" text-anchor="middle" font-size="8.6" fill="#96702f">cambiara aquí rompería el contraste.</text>
+
+  <rect x="272" y="192" width="230" height="70" rx="4" fill="#fff" stroke="#e0a75e"/>
+  <text x="387" y="211" text-anchor="middle" font-size="10.5" fill="#7a5717" font-weight="600">on-photo-destructive</text>
+  <text x="387" y="228" text-anchor="middle" font-size="8.6" fill="#96702f">El rojo del tema oscuro da 2.77:1</text>
+  <text x="387" y="241" text-anchor="middle" font-size="8.6" fill="#96702f">sobre blanco fijo: ilegible. El rol es</text>
+  <text x="387" y="254" text-anchor="middle" font-size="8.6" fill="#96702f">«error sobre blanco», no «error».</text>
+
+  <rect x="518" y="192" width="230" height="70" rx="4" fill="#fff" stroke="#e0a75e"/>
+  <text x="633" y="211" text-anchor="middle" font-size="10.5" fill="#7a5717" font-weight="600">footer-*</text>
+  <text x="633" y="228" text-anchor="middle" font-size="8.6" fill="#96702f">El pie es oscuro en ambos temas:</text>
+  <text x="633" y="241" text-anchor="middle" font-size="8.6" fill="#96702f">cierra la página como el lomo de un</text>
+  <text x="633" y="254" text-anchor="middle" font-size="8.6" fill="#96702f">libro. Si siguiera al tema, se fundiría.</text>
+</svg>
+<figcaption><strong>Figura 2</strong> — Paleta por tema y los tres grupos de tokens deliberadamente
+invariantes.</figcaption>
+</figure>
+
+<p>El caso del rojo de error resume la idea. El token del tema oscuro (<code>#F87171</code>) está
+calibrado contra fondos de tarjeta y de página; el mensaje de error del formulario de suscripción
+vive sobre blanco fijo, donde ese mismo rojo da <strong>2,77:1</strong> y resulta ilegible. La
+solución no fue aclararlo ni oscurecerlo, sino reconocer que se trata de otro rol —«error sobre
+blanco fijo»— y darle su propio valor invariante.</p>
+
+<!-- ========================= 5 ========================= -->
+<h2>5. Accesibilidad comprobada, no declarada</h2>
+
+<p>Afirmar que una paleta cumple los umbrales de contraste es fácil; comprobarlo en treinta y tres
+combinaciones a mano, no. El repositorio incluye un verificador propio que calcula la luminancia
+según la fórmula de WCAG y contrasta cada pareja de tokens que la página usa de verdad, incluidas
+las que resultan de superponer un color translúcido sobre otro.</p>
+
+<pre><span class="c">$ py scripts/contraste.py</span>
+
+=== MODO CLARO ===
+  <span class="s">OK</span>   16.21:1  (min 4.5)  texto principal sobre fondo
+  <span class="s">OK</span>    6.75:1  (min 4.5)  texto secundario sobre fondo
+  <span class="s">OK</span>    4.94:1  (min 4.5)  chip de cata (fondo calculado #edf1ee)
+
+=== MODO OSCURO ===
+  <span class="s">OK</span>   15.59:1  (min 4.5)  texto principal sobre fondo
+  <span class="s">OK</span>    6.31:1  (min 4.5)  chip de cata (fondo calculado #2c2820)
+
+=== FORMULARIO DE SUSCRIPCIÓN (on-photo, blanco fijo en ambos temas) ===
+  <span class="s">OK</span>    4.83:1  (min 4.5)  texto de error sobre input
+
+<span class="s">TODO CORRECTO</span>        33 comprobaciones · 0 fallos</pre>
+<figcaption style="text-align:left;margin:-2mm 0 5mm"><strong>Figura 3</strong> — Salida real del
+verificador (extracto; la ejecución completa comprueba 33 combinaciones).</figcaption>
+
+<p>Lo relevante son los casos límite. El chip de notas de cata no tiene un fondo declarado: resulta
+de un color con opacidad sobre la superficie, así que el script lo calcula antes de medir
+(<code>#EDF1EE</code> en claro, <code>#2C2820</code> en oscuro) en lugar de dar por bueno el token
+de origen. Y da <strong>4,94:1</strong> frente a un mínimo de 4,5 — un margen estrecho que solo se
+conoce midiendo.</p>
+
+<!-- ========================= 6 ========================= -->
+<h2>6. Implementación en Angular</h2>
+
+<h3>6.1 Movimiento sin librerías</h3>
+
+<p>Las apariciones al hacer scroll son una directiva que solo decide <em>cuándo</em>; el
+<em>cómo</em> vive en el CSS. Esa separación permite ajustar la animación sin tocar TypeScript.</p>
+
+<pre><span class="c">// Se oculta ya en el constructor, antes del primer pintado: si esperara</span>
+<span class="c">// a afterNextRender, el contenido asomaría un frame antes de esconderse.</span>
+<span class="k">this</span>.host.nativeElement.classList.add(<span class="s">'reveal'</span>);
+
+<span class="k">new</span> IntersectionObserver(..., {
+  threshold: 0.15,
+  rootMargin: <span class="s">'0px 0px -10% 0px'</span>,   <span class="c">// dispara antes del borde inferior</span>
+});</pre>
+
+<p>Cada elemento se deja de observar en cuanto aparece: volver a animar al subir marearía al
+usuario. El escalonado se resuelve con un índice que el CSS traduce a retardo, y la directiva
+acepta las tres formas de escribirlo en la plantilla mediante una transformación de entrada —sin
+ella, dos de las tres pasarían texto donde se espera un número y la plantilla no compilaría.</p>
+
+<h3>6.2 Un formulario con estados, aunque no haya backend</h3>
+
+<p>El formulario de suscripción usa <strong>Signal Forms</strong> de Angular 21, con validación de
+formato de correo. No envía nada a ninguna parte, y la espera de 400 ms que simula el envío está
+comentada como lo que es: la latencia de interacción que tendría un envío real, no una simulación
+de que el correo llega a algún sitio. La distinción importa —vuelve en la sección siguiente.</p>
+
+<!-- ========================= 7 ========================= -->
+<div class="break"></div>
+<h2>7. La auditoría, y el rediseño que salió de ella</h2>
+
+<p>Terminada la landing, se sometió a una auditoría contra los <strong>diez principios de buen
+diseño de Dieter Rams</strong>, evaluando 39 elementos interactivos y el texto de las nueve
+secciones. El resultado fue <strong>15/30</strong>, por debajo del umbral que obliga a un
+rediseño.</p>
+
+<div class="callout">
+  <p><span class="lbl">Qué puntuó mal, y qué no.</span> La identidad visual obtuvo la nota máxima
+  en estético, discreto y duradero: la paleta, la tipografía, los tokens, el modo oscuro y la
+  accesibilidad se conservaron íntegros. Lo que falló fue la <strong>capa de interacción y
+  contenido</strong>: controles que no hacen nada, estados de interfaz ausentes y un texto que
+  prometía más de lo que sostenía.</p>
+</div>
+
+<table>
+  <tr><th style="width:42%">Hallazgo</th><th style="width:28%">Decisión</th><th>Estado</th></tr>
+  <tr><td>Botón de carrito sin ningún comportamiento — el único control de 39 que no daba señal alguna</td>
+      <td><strong>Eliminado.</strong> No existe concepto de carrito en la página: no hay checkout ni navegación</td><td>Corregido</td></tr>
+  <tr><td>Cinco superlativos sin respaldo en cinco secciones distintas</td>
+      <td><strong>Sustituidos por hechos verificables:</strong> «regiones cafetaleras más excepcionales» pasó a nombrar las tres regiones</td><td>Corregido</td></tr>
+  <tr><td>Faltaban cuatro de seis estados de interfaz; el formulario no validaba más allá del navegador</td>
+      <td><strong>Validación propia y estado de envío</strong> con Signal Forms</td><td>Corregido</td></tr>
+  <tr><td>Seis formas visuales distintas para la misma acción primaria</td>
+      <td><strong>Unificadas</strong> tras clasificar cuáles eran categorías legítimas y cuáles desviaciones</td><td>Corregido</td></tr>
+  <tr><td>Quince enlaces del pie apuntando a <code>#</code></td>
+      <td><strong>Se mantienen</strong>, por decisión explícita de alcance</td><td>Deuda declarada</td></tr>
+</table>
+
+<p>La última fila es la más importante de la tabla. Esos quince enlaces siguen sin llevar a ninguna
+parte, y el plan de rediseño lo registra por escrito como una decisión tomada —no un descuido—
+junto con la condición que la reabriría: que el proyecto gane navegación y esos enlaces puedan
+apuntar a algo real.</p>
+
+<p>La diferencia entre un defecto y una deuda técnica es exactamente esa: que esté escrito quién
+lo decidió, por qué, y qué haría falta para cambiarlo. Sin ese registro, quien retome el proyecto
+dentro de seis meses no puede distinguir una decisión de un olvido.</p>
+
+<!-- ========================= 8 ========================= -->
+<h2>8. Limitaciones conocidas</h2>
+
+<ul>
+  <li>No hay backend: el formulario de suscripción valida y confirma, pero no envía nada.</li>
+  <li>Los enlaces del pie de página no tienen destino (sección 7, deuda declarada).</li>
+  <li>El proyecto no tiene pruebas automatizadas. La verificación se concentra en el contraste y
+      en la revisión visual; una suite de renderizado añadiría poco a una página sin lógica.</li>
+  <li>Altura es una marca ficticia: ni el tostador ni los cafés existen.</li>
+</ul>
+
+<!-- ========================= 9 ========================= -->
+<h2>9. Conclusiones</h2>
+
+<p>Respondiendo a la primera pregunta: <strong>Stitch sirve como punto de partida, no como
+resultado.</strong> Acertó en detalles que mejoraron la propuesta inicial —la tipografía
+definitiva, el tratamiento de sombras, el comportamiento de las tarjetas al pasar el cursor— y
+falló al inyectar el lenguaje visual de su fabricante donde hacía falta el de la marca. Sin
+alguien que distinga una cosa de la otra, la herramienta impone su catálogo.</p>
+
+<p>Y a la segunda: lo que convierte un diseño generado en código mantenible es <strong>un filtro
+con memoria</strong>. El sistema de diseño no guarda solo los valores finales, sino la lista de lo
+que se descartó y por qué. Sin esa lista, el siguiente que regenere el archivo revertiría las
+cuatro decisiones más importantes del proyecto sin saber que existieron.</p>
+
+<p>La auditoría final aportó la lección menos esperada. Una página puede estar cuidada en todo lo
+visible —contraste medido, tokens coherentes, modo oscuro calibrado— y seguir siendo deshonesta
+con quien la usa: controles que no responden y texto que promete lo que no sostiene. Medir el
+contraste es comprobable y cómodo; comprobar que cada elemento hace lo que aparenta exige un marco
+externo y disposición a que el resultado salga mal.</p>
+
+<!-- ========================= 10 ========================= -->
+<h2>10. Método de trabajo</h2>
+
+<p>Este proyecto se construyó con asistencia de herramientas de IA de principio a fin: el diseño
+salió de Stitch, el sistema de tokens de una skill generadora, y el código se escribió con un
+asistente. El repositorio lo declara —<code>CLAUDE.md</code> está versionado junto al código— y
+de hecho el trabajo entero consistió en decidir qué hacer con lo que esas herramientas
+devolvían.</p>
+
+<p>Ahí está su interés. La tabla de la sección 3 es una lista de cosas que las herramientas
+propusieron con total seguridad y que no se aceptaron: una tipografía catalogada para
+aplicaciones infantiles, un fondo que compite con la fotografía, un patrón de scroll hostil en
+móvil, y una paleta entera de Material Design que Stitch inyectó porque es el lenguaje de su
+fabricante, no porque lo pidiera la marca. Aceptar cualquiera de las cuatro habría sido más
+rápido.</p>
+
+<p>La auditoría de la sección 7 cierra la idea: la página estaba terminada y se veía bien, y aun
+así se sometió a un marco externo que dictaminó rediseño. Ninguna herramienta pide que se
+examine su propio resultado. Esa es la parte que no se delega.</p>

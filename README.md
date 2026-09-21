@@ -5,6 +5,9 @@ especialidad de origen ecuatoriano.
 
 **Demo: https://altura-landing-nine.vercel.app**
 
+**Informe técnico:** [el método de diseño, el sistema de tokens y la auditoría](docs/informe-tecnico.pdf)
+(PDF, septiembre 2026)
+
 Es un proyecto de práctica. Su propósito no es la marca sino el proceso: probar
 **Google Stitch** como herramienta de diseño de interfaces y llevar el peso del
 trabajo al diseño visual en vez de a la lógica. No tiene backend — el formulario de
