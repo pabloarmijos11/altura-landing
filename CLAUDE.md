@@ -1,7 +1,13 @@
-# CLAUDE.md — prueba-stich (landing "Altura")
+# CLAUDE.md — altura-landing (landing "Altura")
 
 Instrucciones para trabajar en este proyecto. Este archivo dice **cómo trabajar**;
 el vault (`../Vault Proyectos`) dice **qué se aprendió**. Si se contradicen, gana el vault.
+
+> **La carpeta se llamaba `prueba-stich`** hasta el 2026-09-20; ahora coincide con
+> el repositorio, `altura-landing`. En el vault la página y las fuentes **siguen**
+> bajo el nombre viejo: renombrarlas rompería los wikilinks de media docena de
+> notas, y las fuentes son capa inmutable. Si una ruta o un enlace de este archivo
+> dice `prueba-stich`, no es un descuido.
 
 ---
 
